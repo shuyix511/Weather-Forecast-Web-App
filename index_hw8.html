@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+	<link rel="stylesheet" href="css/screen.css">
+	<script src="../lib/jquery.js"></script>
+	<script src="../dist/jquery.validate.js"></script>
+
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+<!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    
+     <script src="moment-with-locales.js" type="text/javascript"></script>
+     <script src="moment-timezone-with-data-2010-2020.js" type="text/javascript"></script>
+     <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
+	<script src="Display.js" type="text/javascript"></script>
+    
+    <style>
+    body {
+        background: url('http://cs-server.usc.edu:45678/hw/hw8/images/bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        }
+     select.custom {
+                    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20fill%3D%22%23555555%22%20%0A%09%20width%3D%2224px%22%20height%3D%2224px%22%20viewBox%3D%22-261%20145.2%2024%2024%22%20style%3D%22enable-background%3Anew%20-261%20145.2%2024%2024%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cpath%20d%3D%22M-245.3%2C156.1l-3.6-6.5l-3.7%2C6.5%20M-252.7%2C159l3.7%2C6.5l3.6-6.5%22%2F%3E%0A%3C%2Fsvg%3E");
+                    padding-right: 25px;
+                    background-repeat: no-repeat;
+                    background-position: right center;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+            }
+        #Right_Now_Summary_Info{
+            background-color: rgb(255,115,109);
+            margin-left: 0px;
+            margin-right: 0px;
+    
+        }
+        div#basicMap{
+            width: 100%;
+            height: 505px;
+            border: solid white 1px;
+            padding: 0px;
+            margin-right: -15px;
+            margin-bottom: 20px;
+            
+        }
+        #Right_Now_Left{
+            
+            padding-left: 0px;
+            padding-right: 0px;
+            
+        }
+        
+        #Icon_Image{
+            width: 50%;
+        }
+        #facebook{
+            width: 30px;
+            height: 30px;
+        }
+        #Icon_Image_24{
+            width: 45px;
+            height: 45px;
+        }
+        
+        #Left_info_tab{
+            padding-right: 0px;
+            padding-left: 0px;
+            
+        }
+        #L_H_Temperature{
+            text-align: center;
+            valign: bottom;
+            padding-bottom: 9px;
+        }
+        #Icon{
+             text-align:center;
+             padding-top: 14px;
+             padding-bottom: 14px;
+             vertical-align: middle;
+        }
+        .set_right_now{
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
+        #Summary_Weather_Info{
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            
+        }
+        #Summary_info{
+            text-align:center;
+        }
+        #background_set_24{
+            background-color: rgb(0,110,164);
+            color:white;
+            font-weight: bold;
+            margin:0 auto;
+        }
+        #table_header_info_24{
+            background-color:rgb(243,242,241) ;
+            margin:0 auto;
+        }
+        #table_content_info_24{
+            background-color: white;
+            margin:0 auto;
+        }
+        .set_margin_value_24{
+            margin-right: -15px;
+        }
+        #Next_24_Hours{
+            background-color: white;
+        }
+        .pink{
+            background-color:rgb(248,223,218);
+        }
+        .left_set{
+            width: 50%;
+        }
+        #Right_Map{
+            padding-left: 0px;
+        }
+        #Icon_Image_7{
+            width: 66px;
+        }
+        #modal_1{
+            background-color: rgb(0,123,177);
+        }
+        #modal_2{
+            background-color: rgb(255,47,43);
+        }
+        #modal_3{
+            background-color: rgb(250,135,65);
+        }
+        #modal_4{
+            background-color: rgb(171,163,52);
+        }
+        #modal_5{
+            background-color: rgb(162,106,160);
+        }
+        #modal_6{
+            background-color: rgb(255,112,108);
+        }
+        #modal_7{
+            background-color: rgb(232,54,98);
+        }
+        .modal_image{
+            width: 30%;
+        }
+        #Temp_Value_7{
+            margin-top: 10px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #day_date{
+            padding-bottom: 5px;
+        }
+        .modal_info_adjust{
+            font-size: 22px;
+            font-weight: 500;
+        }
+        .modal_info_value_adjust{
+            font-size: 16px;
+        }
+        .day_summary_7{
+            font-size: 27px;
+            font-weight: 700;
+        }
+        .day_7_trigger_modal{
+            padding-left: 6px;
+            padding-right: 7px;
+        }
+        
+        
+        .set_background{
+            background-color:rgb(238,239,236);
+        }
+        .set_background_li{
+            margin-left: 0px;
+        }
+        .set_margin_24{
+            width: auto;
+            margin:0 auto;
+        }
+        @media (min-width: 980px){
+            #myTabContent_modal{
+                background-color: black;
+                margin-left: -15px;
+                margin-right:-16px;
+            }
+        }
+        @media (max-width: 979px){
+            #myTabContent_modal{
+                background-color:transparent;
+            }
+        }
+        
+
+    </style>
+
+</head>
+<body>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '519808151519876',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function FB_Post(){
+            FB.getLoginStatus(function (response){
+                if(response.status != 'connected'){
+                    post();
+                }
+                else{
+                    post();
+                }
+            });
+        function post(){
+            FB.ui({
+                        method     : 'feed',
+                        link       : 'https://forecast.io',
+                        name       : 'Current Weather in ' + $('#City').val() + ','+$('#State').val(),
+                        picture    : 'http://cs-server.usc.edu:45678/hw/hw8/images/'+facebook_pic +'.png',
+                        description:  facebook_summary + ',' + facebook_temperature,
+                        caption    : 'WEATHER INFORMATION FROM FORECAST.IO'
+                    },
+                    function(response){
+                        if(response && !response.error_message){
+                            alert("Posted Successfully");
+                        }
+                        else{
+                            alert("Not Posted");
+                        }
+
+                    }
+            );
+        }
+
+        };
+        
+    
+    </script>
+    <h1 align="center">Forecast Search</h1>
+
+	<div class="container" style="background:rgba(0,0,0,0.2);padding:20px">       
+        <form id="Form" name="Form" method="get" action="">
+             <div class = "row img-rounded">
+                <div class="col-md-3 form-group">
+                    <label for="Address"><span style="color:white">Street Address</span><span style="color:red">*</span></label>
+                    <input id="Address" class="form-control" name="Address"  type="text" placeholder="Enter streer address" required>
+                 </div>
+
+                <div class="col-md-2 form-group">
+                    <label for="City"><span style="color:white">City</span><span style="color:red">*</span></label>
+                    <input id="City" class="form-control" type="text" name="City" placeholder="Enter the city name" required>
+                 </div>   
+
+                <div class="col-md-2 form-group">
+                    <label for="State"><span style="color:white">State:</span> <span style="color:red" >*</span></label>
+                    <select id="State" class="form-control custom" name="State"/>
+                            <option value="" selected= "selected">Select your state...</option>
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="DC">District Of Columbia</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming</option>
+                    </select></br>
+                </div>
+
+                 <div class="col-md-3">
+                    <label for="Degree"><span style="color:white">Degree:</span> <span style="color:red">*</span></label></br>
+                    <input type="radio" class="radio-inline" id="Fahrenheit" name="Degree" value="Fahrenheit" checked=”checked”/><span style="color:white"> Fahrenheit</span></label>
+                    <input type="radio" class="radio-inline" id="Celsius" name="Degree" value="Celsius" /><span style="color:white"> Celsius</span></label>
+                </div>
+
+                <div class="col-md-2 form-group pull-right">
+
+                    <button class="btn btn-primary" type="submit" value="search"><span class="glyphicon glyphicon-search"></span>Search</button>
+                    <button type="button" class="btn" onclick="Clear()"><span class="glyphicon glyphicon-refresh"></span>clear</button>
+                </div>
+            </div>
+
+            <div class = "row">
+                <div class="col-md-13 pull-right" style="align:right">
+                    <span style="color:white" class="text-right">Powered by:</span> 
+                    <a href="http://forecast.io"><img src= "http://cs-server.usc.edu:45678/hw/hw8/images/forecast_logo.png" width="120"></a>
+                </div>
+            </div>
+        </form>  
+    </div>
+
+    <div class="container"> 
+        <div class='row'>
+            <span style="width: auto; margin-left: auto; margin-right: auto;"><hr></span>
+        </div>
+    </div>
+       
+    <div id="final_display">
+            
+    </div>
+            
+  
+    
+
+
+</body>
+</html>
